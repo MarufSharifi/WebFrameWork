@@ -1,0 +1,24 @@
+{
+  "name": "web",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:db": "json-server -w db.json",
+    "start:parcel": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarufSharifi/WebFrameWork.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarufSharifi/WebFrameWork/issues"
+  },
+  "homepage": "https://github.com/MarufSharifi/WebFrameWork#readme",
+  "dependencies": {
+    "axios": "^0.22.0"
+  }
+}
