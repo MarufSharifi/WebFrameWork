@@ -1,37 +1,14 @@
-import axios, { AxiosResponse } from "axios";
+import { Eventing } from "./Eventing";
+import { Sync } from "./Sync";
 
-interface PropType {
+export interface PropType {
   name?: string;
   age?: number;
-  id?: string;
+  id?: number;
 }
 
+const rootUrl = "http://localhost:300/users";
 export class User {
-  constructor(private data: PropType) {}
-
-  get(propName: string): string | number {
-    return this.data[propName];
-  }
-
-  set(update: PropType): void {
-    Object.assign(this.data, update);
-  }
-
-  fetch(): void {
-    axios
-      .get(`http://localhost:3000/users/${this.get("id")}`)
-      .then((response: AxiosResponse) => {
-        this.set(response.data);
-      });
-  }
-
-  save(): void {
-    const id = this.get("id");
-
-    if (id) {
-      axios.put(`http://localhost:3000/users/${id}`, this.data);
-    } else {
-      axios.post("http://localhost:3000/users", this.data);
-    }
-  }
+  events: Eventing = new Eventing();
+  syn: Sync<PropType> = new Sync<PropType>(rootUrl);
 }
