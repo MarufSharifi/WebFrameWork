@@ -3,10 +3,10 @@ import { User } from "./modals/User";
 
 axios.get("http://localhost:3000/users");
 
-const users = new User();
+const users = new User({ id: 1, name: "Maruf", age: 21 });
 
-users.events.on("change", () => {
-  console.log("change");
+users.on("save", () => {
+  console.log("new data was saved to db");
 });
 
-users.events.trigger("change");
+users.save();
