@@ -1,12 +1,9 @@
-import axios from "axios";
 import { User } from "./modals/User";
 
-axios.get("http://localhost:3000/users");
+const collection = User.buildUserCollection();
 
-const users = new User({ id: 1, name: "Maruf", age: 21 });
-
-users.on("save", () => {
-  console.log("new data was saved to db");
+collection.on("change", () => {
+  console.log(collection);
 });
 
-users.save();
+collection.fetch();
