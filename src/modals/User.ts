@@ -22,4 +22,9 @@ export class User extends Model<PropType> {
   static buildUserCollection() {
     return new Collection<User, PropType>(rootUrl, User.buildUser);
   }
+
+  setRandomAge(): void {
+    const age = Math.round(Math.random() * 100);
+    this.set({ age });
+  }
 }
