@@ -1,15 +1,20 @@
-import { UserEdit } from "./views/userEdit";
-import { User } from "./modals/User";
+import { UserList } from "./views/UserList";
+import { Collection } from "./modals/Collection";
+import { User, PropType } from "./modals/User";
 
-const user = User.buildUser({ name: "NAME", age: 21 });
+const users = new Collection(
+  "http://localhost:3000/users",
+  (json: PropType) => {
+    return User.buildUser(json);
+  }
+);
 
-const root = document.getElementById("root");
+users.on("change", () => {
+  const root = document.getElementById("root");
 
-if (root) {
-  const userEdit = new UserEdit(root, user);
-  userEdit.render();
+  if (root) {
+    new UserList(root, users).render();
+  }
+});
 
-  console.log(userEdit);
-} else {
-  throw new Error("you must have root element");
-}
+users.fetch();
